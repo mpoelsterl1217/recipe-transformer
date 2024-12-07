@@ -395,7 +395,6 @@ def get_chatbot_response(user_input, model):
         print("Here are new ingredient list and steps list: ")
         output = "what else you want?"
 
-    
 
     # how do i preheat the oven? (any question that requires external knowledge)
     elif any(inquiry in user_input for inquiry in inquiries):

@@ -122,17 +122,28 @@ def parse_ingredient(line):
         measurement = []
 
         # Extract quantity (numbers or fractions)
+        previous_word = ""
         for word, tag in tagged:
             match = re.match(r"(\d+/\d+)|(\d*\.\d+)|(\d+)|[\u00BC-\u00BE\u2150-\u215E]", word)
             #if tag == "CD":
             if word.isdigit() or fraction_verify(word) or match:
+                if previous_word == "(":
+                    previous_word = word
+                    continue
                 quantity.append(word)
+            previous_word = word
         
         # Extract measurement (including plural forms)
+        previous_word = ""
         for word, tag in tagged:
+            match = re.match(r"(\d+/\d+)|(\d*\.\d+)|(\d+)|[\u00BC-\u00BE\u2150-\u215E]", word)
             lemma = lemmatizer.lemmatize(word, pos='n')  # Normalize the token to singular form
             if lemma in units:
+                if previous_word.isdigit() or fraction_verify(word) or match:
+                    previous_word = word
+                    continue
                 measurement.append(word)
+            previous_word = word
         
         # Extract preparation details (terms like softened)
         for word, tag in tagged:
@@ -207,22 +218,16 @@ def clean_nouns(words, doc):
             result.append(word)
     return result
 
-# ingredients = ["1 cup salted butter softened",
-#     "1 cup granulated sugar",
-#     "1 cup light brown sugar packed",
-#     "2 teaspoons pure vanilla extract",
-#     "2 large eggs",
-#     "3 cups all-purpose flour",
-#     "1 teaspoon baking soda",
-#     "½ teaspoon baking powder",
-#     "1 teaspoon sea salt",
-#     "2 cups chocolate chips (14 oz)"
+# ingredients = [
+#     "1 (16 ounce) package cottage cheese",
+#     "4 ½ cups tomato-basil pasta sauce"
 # ]
 
 # for i in ingredients:
 #     final = parse_ingredient(i)
 #     print(i)
-#     print(final)
+#     print(final.quantity)
+#     print(final.measurement)
 #     print()
 
 # final = parse_ingredient("5 cups marinara sauce")
