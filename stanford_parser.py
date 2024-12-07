@@ -129,5 +129,3 @@ class IngredientParser:
 
 #     for line in lines:
 #         parser.parse_line(line)
-
-    

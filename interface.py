@@ -366,6 +366,13 @@ def get_chatbot_response(user_input, model):
             # answer = input()
             # if answer == "yes"
 
+    elif "double the recipe" in user_input:
+        model.scale_recipe(2)
+        output = format_ingredients_request(model.ingredient_list)
+    elif "half the recipe" in user_input:
+        model.scale_recipe(.5)
+        output = format_ingredients_request(model.ingredient_list)
+
     # thank you!
     elif "thank" in user_input:
         output = "You're welcome! What would you like to know next?"
