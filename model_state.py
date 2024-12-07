@@ -15,7 +15,10 @@ class State:
         for ingredient in self.ingredient_list:
             ingredient.quantity = handle_single_character_fractions_smh(ingredient.quantity)
             if ingredient.quantity:
-                ingredient.quantity = str(float(sum( map( fractions.Fraction, ingredient.quantity.split() ) )) * factor)
+                q = float(sum( map( fractions.Fraction, ingredient.quantity.split() ) )) * factor
+                if q % 1 == 0:
+                    q = int(q)
+                ingredient.quantity = str(q)
         print(self.ingredient_list)
 
 def handle_single_character_fractions_smh(q):
