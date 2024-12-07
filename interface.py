@@ -9,6 +9,7 @@ from parse_ingredients import parse_ingredients
 from model_state import State
 from nltk.tokenize import sent_tokenize
 from stanford_parser import IngredientParser
+from fractions import Fraction
 
 def grab_info(response):
     # todo
@@ -90,10 +91,19 @@ def extract_number_re(text):
 def format_ingredients_request(ingredients):
     if ingredients == [] or ingredients == None:
         return "Sorry, I'm having trouble retrieving the list. Would you like to ask another question?\n"
-    response = "Sure! You will need:"
+    response = "\nThe ingredients list:"
     for ingredient in ingredients:
         response += f"\n {ingredient}"
-    response += "\nWhat else would you like to know?"
+    # response += "\nWhat else would you like to know?"
+    return response
+
+def format_steps_request(steps):
+    if steps == [] or steps == None:
+        return "Sorry, I'm having trouble retrieving the list. Would you like to ask another question?\n"
+    response = "Steps:"
+    for step in steps:
+        response += f"\n {step}"
+    # response += "\nWhat else would you like to know?"
     return response
 
 def get_init_info():
@@ -119,6 +129,7 @@ def setup(model):
     print("[1] Go over ingredients list ")
     print("[2] Go over recipe steps ")
     print("[3] Ask a question about the recipe")
+    print("[4] transform the recipe")
 
     num=input()
     output = ""
@@ -135,6 +146,12 @@ def setup(model):
             break
         elif num=="3":
             output = "Great! What is your question?"
+            break
+        elif num== "4":
+            print(format_ingredients_request(model.ingredient_list))
+            print()
+            print(format_steps_request(model.steps_list))
+            print("\nWhat transform would you like to use?")
             break
         else:
             print()
@@ -164,6 +181,11 @@ def get_chatbot_response(user_input, model):
     nth_step_regexes = [rf"take me to the {ordinal_regex} step",
                                         rf"what's the {ordinal_regex} step", rf"{ordinal_regex} step"]
     
+    to_healthy = ["to healthy"]
+    from_healthy = ["from healthy"]
+    to_change_quantity = ["to change quantity"]
+    to_vegetarian = ["to vegetarian"]
+    from_vegetarian = ["to vegetarian"]
 
     # n-th step requests
     matching_regex = None
@@ -333,6 +355,45 @@ def get_chatbot_response(user_input, model):
                 model.output_history.append(output)
             else:
                 output = "If you're done with the last step, you can move on to the next"
+    
+    # to change quantity
+    elif any(asks in user_input for asks in to_change_quantity):
+        print("what factor you want?")
+        factor=input()
+        try:
+            num_float = float(Fraction(factor))
+        except ValueError:
+            print("The string is not a valid float!")
+        
+        model.scale_recipe(num_float)
+
+        print("Here are new ingredient list and steps list: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "what else you want?"
+    
+     # to heathly
+    elif any(asks in user_input for asks in to_healthy):
+        # todo
+        print("Here are new ingredient list and steps list: ")
+        output = "what else you want?"
+    
+    # from heathly
+    elif any(asks in user_input for asks in from_healthy):
+        # todo
+        print("Here are new ingredient list and steps list: ")
+        output = "what else you want?"
+    
+    elif any(asks in user_input for asks in to_vegetarian):
+        # todo
+        print("Here are new ingredient list and steps list: ")
+        output = "what else you want?"
+    
+    elif any(asks in user_input for asks in from_vegetarian):
+        # todo
+        print("Here are new ingredient list and steps list: ")
+        output = "what else you want?"
 
     
 
@@ -407,7 +468,8 @@ def main():
     model = State(step_list, in_list)
     model = setup(model)
 
-    while True:
+    user_input = ""
+    while True and user_input != "q":
         user_input = input().lower()
         if user_input == "q":
             print("It was nice chatting with you!")

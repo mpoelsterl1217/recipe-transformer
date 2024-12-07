@@ -42,7 +42,7 @@ class Step:
             self.details["current_uasge"] = current_uasge
 
     def __str__(self):
-        return str(self.step_num) + self.text # + str(self.details)
+        return str(self.step_num) + ". " + self.text # + str(self.details)
 
 def parse_step(text, ingredients_list):
 
@@ -167,62 +167,7 @@ def clean_nouns(words, doc):
 def is_number_or_fraction(word):
     return bool(re.match(r"(\d+/\d+|\d*\.\d+|\d+)", word)) or fraction_verify(word)
 
-# # Function to extract quantity + unit pairs from a sentence
-# def extract_quantity_unit_pairs(sentence, final_ingredients):
-#     print(final_ingredients)
-    
-#     # Tokenize the sentence
-#     tokens = sentence.split()
-
-#     quantity_unit_pairs = []
-
-#     i=0
-#     while i < len(tokens) - 1:
-#         word = tokens[i]
-#         next_word = tokens[i + 1]
-
-#         # Check if the word is a number or fraction
-#         if is_number_or_fraction(word):
-#             # Lemmatize the next word (unit) to ensure we get the singular form
-#             lemma = lemmatizer.lemmatize(next_word.lower())
-
-#             while is_number_or_fraction(lemma):
-#                 word += " "+next_word
-#                 next_word = tokens[i + 2]
-#                 lemma = lemmatizer.lemmatize(next_word.lower())
-#                 i = i + 1
-
-#             if lemma in units or is_food(lemma) or lemma == "more":
-#                 # If a valid unit follows the number, store the pair
-#                 i = i+1
-
-#                 # try to find corresponding ingredients name
-#                 count=i + 1
-#                 while count < len(tokens) - 1:
-#                     current = lemmatizer.lemmatize(tokens[count])
-#                     # current = tokens[count]
-#                     current = re.sub(r"[,\.!@#$%^&*()\-+=:;\"'<>?/\\\[\]{}|`~]", "", current)
-#                     print("Hello ", current)
-#                     # no corresponding ingredients name
-#                     if (current == "oil"):
-#                         print(current in units)
-#                     if current in units:
-#                         quantity_unit_pairs.append({"quantity": word, "unit": next_word, "ingredient_name": ""})
-#                         break
-                    
-#                     for ingredient in final_ingredients:
-#                         print("What !", ingredient.ingredient_name)
-#                         if current in ingredient.ingredient_name:
-#                             quantity_unit_pairs.append({"quantity": word, "unit": next_word, "ingredient_name": ingredient.ingredient_name})
-#                             break
-#                     count +=1
-#                 continue
-                
-#         i=i+1
-                
-#     return quantity_unit_pairs
-
-
+# Function to find current quantity
 def extract_quantity_unit_pairs(sentence, final_ingredients):
     # print(final_ingredients)
 
