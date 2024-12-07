@@ -50,10 +50,10 @@ def grab_info(response):
 
                 num += 1
 
-    #for i in steps_list:
-       # print(i.text)
-        #print(i.details)
-        #print()
+    for i in steps_list:
+        print(i.text)
+        print(i.details)
+        print()
     # steps_list.pop(0)
     # steps_list = [item.strip() for item in steps_list]
     # steps_list = [item for item in steps_list if item != ""] 

@@ -1,4 +1,5 @@
 import fractions
+import re
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -11,7 +12,7 @@ class State:
 
     def scale_recipe(self, factor):
         # ["[0-9]", "[½⅓⅔¼¾⅛⅜⅝⅞]"]
-        print(self.ingredient_list)
+        # print(self.ingredient_list)
         for ingredient in self.ingredient_list:
             ingredient.quantity = handle_single_character_fractions_smh(ingredient.quantity)
             if ingredient.quantity:
@@ -19,6 +20,29 @@ class State:
                 if q % 1 == 0:
                     q = int(q)
                 ingredient.quantity = str(q)
+        
+        # update step for scale
+        for step in self.steps_list:
+            current_usage_list = step.details.get("current_uasge")
+            if current_usage_list !=[] and current_usage_list != None:
+                for current_usage in current_usage_list:
+                    quantity = current_usage.get("quantity")
+                    unit = current_usage.get("unit")
+                    if quantity:  # Ensure quantity is not None or empty
+                        # Compute the new quantity
+                        new_quantity = float(fractions.Fraction(quantity)) * factor
+                    
+                        # Create the regex dynamically to match the exact quantity
+                        regex_pattern = rf"\b{quantity}\b(\s*{unit})?"
+                    
+                        # Replace the matched quantity with the scaled quantity
+                        step.text = re.sub(
+                            regex_pattern, 
+                            f"{new_quantity} {unit}" if unit else f"{new_quantity}", 
+                            step.text
+                        )
+
+
         print(self.ingredient_list)
 
 def handle_single_character_fractions_smh(q):
