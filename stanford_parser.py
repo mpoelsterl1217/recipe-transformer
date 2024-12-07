@@ -8,8 +8,8 @@ import subprocess
 class IngredientParser:
 
     def __init__(self):
-        parser_path = Path("stanford-corenlp-4.5.7/stanford-corenlp-4.5.7.jar")
-        model_path = Path("stanford-corenlp-4.5.7/stanford-corenlp-4.5.7-models.jar")
+        parser_path = Path("stanford-corenlp-4.5.7\stanford-corenlp-4.5.7.jar")
+        model_path = Path("stanford-corenlp-4.5.7\stanford-corenlp-4.5.7-models.jar")
 
         if not (parser_path.exists() and model_path.exists()):
             ## Download stanford coreNLP
