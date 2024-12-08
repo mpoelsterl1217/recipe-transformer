@@ -28,7 +28,7 @@ We have also implemented the following optional features:
 
 ## Previous Features
 
-We have built our chatbot to handle inputs/questions such as:
+Previous features are still supported, allowing for inquiries such as:
 - Show me the ingredient list.
 - What ingredients do I need?
 - Where do I begin?
