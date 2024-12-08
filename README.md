@@ -3,7 +3,7 @@
 
 ## Requirements
 
-You must have a Java runtime installed on your machine. Install 'requirements.txt' in a virtual environment.
+You must have a Java runtime installed on your machine. Install 'requirements.txt' in a virtual environment. Because of the way Windows unzips files, you may encounter an issue where the code has trouble referencing the correct file path. If this happens, make sure to check that the contents of stanford-core-nlp-4.5.7.zip are directly inside a folder with the name stanford-core-nlp-4.5.7/ . This should happen automatically when running the code, but ocassionally Windows unzips the contents into a second subfolder. Feel free to contact us with any questions.
 
 ## Instructions
 
