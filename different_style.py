@@ -38,7 +38,7 @@ ingredient_categories = {
     "barley", "wheat berries", "bulgur wheat", "millet", "amaranth", "farro", "buckwheat", "cornmeal", 
     "polenta", "grits", "oats", "flour", "vermicelli noodles", "egg noodles", "wheat noodles (lo mein)", 
     "rice noodles", "glass noodles", "udon noodles", "soba noodles", "instant ramen", 
-    "sweet potatoes", "cassava", "tapioca", "potato starch", "arrowroot starch", "cornstarch"],
+    "sweet potatoes", "cassava", "tapioca"],
 
     "condiments" : [
     "soy sauce ", "oyster sauce", "hoisin sauce", "fish sauce", 
@@ -83,8 +83,7 @@ chinese_style = {
     "grains_and_starches" : [
     "white rice", "jasmine rice", "sticky rice", "black rice", "millet", 
     "rice noodles", "glass noodles", "wheat noodles", "hand-pulled noodles", 
-    "egg noodles", "udon noodles", "sweet potato starch", "tapioca starch", 
-    "potato starch"],
+    "egg noodles", "udon noodles"],
 
     "condiments" : [
     "light soy sauce", "dark soy sauce", "oyster sauce", "hoisin sauce", 
@@ -127,15 +126,15 @@ italian_style = {
     "grains_and_starches": [
         "spaghetti", "penne", "fettuccine", "lasagna sheets", "risotto rice (Arborio)", 
         "orzo", "farro", "polenta", "gnocchi", "pappardelle", 
-        "tagliatelle", "linguine", "tortellini", "ravioli", "semolina flour", 
-        "all-purpose flour", "breadsticks", "ciabatta", "focaccia", "couscous"
+        "tagliatelle", "linguine", "tortellini", "ravioli",
+        "breadsticks", "ciabatta", "focaccia", "couscous"
     ],
 
     "condiments": [
         "balsamic vinegar", "red wine vinegar", 
         "tomato paste", "marinara sauce", "pesto", "alfredo sauce", "capers", 
         "anchovy paste", "sun-dried tomatoes",  
-        "Parmesan cheese (grated)", "ricotta", "mascarpone"
+        "parmesan cheese (grated)", "ricotta", "mascarpone"
     ],
 
     "butter-like": ["truffle oil", "garlic oil", "olive oil", "extra virgin olive oil", "extra-virgin olive oil"]
@@ -150,6 +149,7 @@ def find_category(ingredient_name):
     return None
 
 def to_chinese_style(ingredient_name):
+    random.seed(42)
     category = find_category(ingredient_name)
     if category != None:
         ingredient_list = chinese_style.get(category)
@@ -162,6 +162,7 @@ def to_chinese_style(ingredient_name):
     return random_element
 
 def to_itlian_style(ingredient_name):
+    random.seed(42)
     category = find_category(ingredient_name)
     if category != None:
         ingredient_list = italian_style.get(category)

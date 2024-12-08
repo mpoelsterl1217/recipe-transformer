@@ -213,8 +213,8 @@ def get_chatbot_response(user_input, model):
     to_change_quantity = ["change the quantity", "scale the recipe"]
     to_vegetarian = ["to vegetarian", "make it vegetarian", "make the recipe vegetarian"]
     from_vegetarian = ["from vegetarian"]
-    to_chinese =["to chinese", "chinese style"]
-    to_itlian = ["to italian", "italian style"]
+    to_chinese =["to chinese", "chinese style", "chinese"]
+    to_itlian = ["to italian", "italian style", "italian"]
     to_gluten_free = ["to gluten free", "gluten free"]
     to_lactose_free = ["to lactose free", "lactose free"]
 
