@@ -1,5 +1,6 @@
 # recipe-transformer
 
+Public repo link: https://github.com/mpoelsterl1217/recipe-transformer/tree/main
 
 ## Requirements
 
@@ -16,7 +17,7 @@ We have added features to our chatbot to support recipe transformation. We have 
 - change from a vegetarian version ("change it from vegetarian")
 - change to Italian cuisine ("make it Italian cuisine")
 - make the recipe healthier ("make it healthier")
-- revert back to the original recipe ("revert the recipe" or "undo transformations")
+- revert back to the original recipe ("revert the recipe" or "undo transformations") such as from health
 
 We have also implemented the following optional features:
 - double the recipe ("double the recipe")
@@ -24,7 +25,8 @@ We have also implemented the following optional features:
 - scale the recipe by any factor ("scale the recipe")
 - change to gluten free ("make it gluten free")
 - change to lactose free ("make it lactose free")
-- change to Chinese cuisine ("make it Chinese cuisine")
+- change to Chinese cuisine ("to chinese")
+- change to Itlian cuisine ("to italian")
 
 ## Previous Features
 

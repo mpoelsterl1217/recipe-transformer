@@ -487,7 +487,7 @@ def get_chatbot_response(user_input, model):
         output = "What else would you like?"
     elif "half the recipe" in user_input:
         model.scale_recipe(.5)
-        print(format_ingredients_request(model.ingredient_list))
+        print_post_transformation(model)
         output = "What else would you like?"
 
     elif "new recipe" in user_input:
