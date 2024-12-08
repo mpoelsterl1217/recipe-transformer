@@ -11,5 +11,6 @@ healthy_substitutions = {
     "ground beef": "lean turkey",
     "breadcrumbs": "whole oats",
     "cream cheese": "low-fat cream cheese",
-    "eggs": "egg whites"
+    "eggs": "egg whites",
+    "all-purpose flour": "whole wheat flour"
 }

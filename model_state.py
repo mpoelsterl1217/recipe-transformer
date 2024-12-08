@@ -4,6 +4,7 @@ from different_style import to_chinese_style, to_itlian_style
 from step import Step
 from gluten_and_lactose_transform import gluten_substitutes, lactose_substitutes
 from vegetarian import is_meat, meat_replace, is_vegetarian, veg_replace
+from healthy_substitutions import healthy_substitutions
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -14,6 +15,8 @@ class State:
         self.input_history = []
         self.output_history = []
         self.transformations = []
+        self.original_ingredients = ingredient_list
+        self.original_steps_list = steps_list
 
     def scale_recipe(self, factor):
         
@@ -97,14 +100,18 @@ class State:
         print_subst(old_new_ingredient_list)
 
     def to_healthy(self):
-        # self.transformations.append("healthy version")
-        # old_new_ingredient_list = []
-        # for ingredient in self.ingredient_list:
-        #     old_ingredient = ingredient.ingredient_name
-        #     new_ingredient = to_chinese_style(ingredient.ingredient_name)
-        #     ingredient.ingredient_name = new_ingredient
-        #     old_new_ingredient_list.append([old_ingredient,new_ingredient])
-        pass
+        self.transformations.append("healthy version")
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name
+            if old_ingredient in healthy_substitutions:
+                new_ingredient = healthy_substitutions[ingredient.ingredient_name]
+                ingredient.ingredient_name = new_ingredient
+            else:
+                new_ingredient = old_ingredient
+            old_new_ingredient_list.append([old_ingredient,new_ingredient])
+        self.update_steps(old_new_ingredient_list)
+        print_subst(old_new_ingredient_list)
 
     # update steps according to ingredient transformations
     def update_steps(self, old_new_ingredient_list, veg=False):
@@ -183,17 +190,22 @@ class State:
         self.steps_list = new_steps_list
         print_subst(old_new_ingredient_list)
 
+    def revert(self):
+        self.transformations = []
+        self.steps_list = self.original_steps_list
+        self.ingredient_list = self.original_ingredients
+
 def print_subst(old_new_ingredients):
     changes = []
     for subst in old_new_ingredients:
         if subst[0] != subst[1]:
             changes.append(subst[0]+" for "+subst[1])
     if changes != []:
-        print("I recommend substituting:")
+        print("\nI recommend substituting:")
         for c in changes:
             print(c)
     else:
-        print("I don't see anything that needs to be substituted for this transformation!")
+        print("\nI don't see anything that needs to be substituted for this transformation!")
 
 def handle_single_character_fractions_smh(q):
     result = q

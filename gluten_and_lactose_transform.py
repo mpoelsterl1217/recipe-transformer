@@ -13,7 +13,7 @@ gluten_substitutes = {
     "certain sprinkles": "certified gluten-free sprinkles", "pretzels": "gluten-free pretzels", "crackers": "gluten-free crackers",
     "cereals": "certified gluten-free cereals", "soup bases": "gluten-free soup bases", "gravy mixes": "cornstarch-thickened gravy",
     "stuffing mixes": "gluten-free stuffing mix", "processed meat products": "unprocessed meats", "energy bars": "gluten-free energy bars",
-    "processed": "unprocessed"
+    "processed": "unprocessed", "all-purpose flour": "gluten free flour", "flour": "gluten free flour", "rolls": "gluten free rolls"
 }
 
 
