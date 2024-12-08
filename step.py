@@ -233,10 +233,10 @@ def extract_quantity_unit_pairs(sentence, final_ingredients):
         i += 1  # Move to the next token
     
     return quantity_unit_pairs
-#test = Step(1, "Arrange in a single layer on a rimmed baking sheet.",[])
+test = Step(1, "Pour 1/2 cup melted butter in a 9x13-inch baking dish",[])
 
 # test = Step(1, "Toss together butternut squash, 2 teaspoons of the oil, 1/2 teaspoon of the salt, and 1/4 teaspoon of the pepper.",[])
 
-# print(test.details)
-# print(test.text)
-# print(test.step_num)
+print(test.details)
+print(test.text)
+print(test.step_num)

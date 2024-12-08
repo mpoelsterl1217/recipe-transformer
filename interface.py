@@ -120,6 +120,13 @@ def get_init_info():
     else:
         return None
     
+def create_file(text,is_transformed):
+    if not is_transformed:
+        with open("input.txt", "w") as file:
+            file.write(text)
+    else:
+        with open("transformed.txt", "w") as file:
+            file.write(text)
 
 def setup(model):
 
@@ -152,6 +159,9 @@ def setup(model):
             format_ingredients_request(model.ingredient_list) + "\n\n" + \
             format_steps_request(model.steps_list) + \
             "\nWhat transformation would you like to perform?"
+
+            text = format_ingredients_request(model.ingredient_list) + "\n\n" +  format_steps_request(model.steps_list)
+            create_file(text,False)
             break
         else:
             print()
@@ -168,6 +178,9 @@ def print_post_transformation(model):
     print(format_ingredients_request(model.ingredient_list))
     print()
     print(format_steps_request(model.steps_list))
+
+    result = format_ingredients_request(model.ingredient_list) + "\n\n" + format_steps_request(model.steps_list)
+    create_file(result, True)
     
 
 def get_chatbot_response(user_input, model):
@@ -426,10 +439,7 @@ def get_chatbot_response(user_input, model):
 
     elif "revert" in user_input or "undo" in user_input:
         model.revert()
-        print("Here are the new ingredients and steps: ")
-        print(format_ingredients_request(model.ingredient_list))
-        print()
-        print(format_steps_request(model.steps_list))
+        print_post_transformation(model)
         output = "What else would you like?"
 
 
