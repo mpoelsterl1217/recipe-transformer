@@ -2,6 +2,7 @@ import fractions
 import re
 from different_style import to_chinese_style, to_itlian_style
 from step import Step
+import random
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -11,10 +12,11 @@ class State:
         self.current_step = None
         self.input_history = []
         self.output_history = []
+        self.transformations = []
 
     def scale_recipe(self, factor):
-        # ["[0-9]", "[½⅓⅔¼¾⅛⅜⅝⅞]"]
-        # print(self.ingredient_list)
+        
+        self.transformations.append("scale by "+str(factor))
         for ingredient in self.ingredient_list:
             ingredient.quantity = handle_single_character_fractions_smh(ingredient.quantity)
             if ingredient.quantity:
@@ -30,16 +32,13 @@ class State:
                 for current_usage in current_usage_list:
                     quantity = current_usage.get("quantity")
                     unit = current_usage.get("unit")
-                    if quantity:  # Ensure quantity is not None or empty
-                        # Compute the new quantity
+                    if quantity:
                         new_quantity = float(fractions.Fraction(quantity)) * factor
 
                         current_usage["quantity"] = new_quantity
 
-                        # Create the regex dynamically to match the exact quantity
                         regex_pattern = rf"\b{quantity}\b(\s*{unit})?"
                     
-                        # Replace the matched quantity with the scaled quantity
                         step.text = re.sub(
                             regex_pattern, 
                             f"{new_quantity} {unit}" if unit else f"{new_quantity}", 
@@ -47,39 +46,63 @@ class State:
                         )
 
     def to_chinese(self):
+        self.transformations.append("to chinese")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
             new_ingredient = to_chinese_style(ingredient.ingredient_name)
             ingredient.ingredient_name = new_ingredient
-            old_new_ingredient_list.append([old_ingredient,new_ingredient])
-        
-        
-        new_steps_list=[]
-        num=0
-        for step in self.steps_list:
-            text = step.text
-            if step.details.get("ingredients") != None and step.details.get("ingredients") !=[]:
-                for i in old_new_ingredient_list:
-                    oldname = i[0]
-                    newname = i[1]
-                    if oldname in text:
-                        text = text.replace(oldname, newname)
-            # print("wait! :",text)
-            new_steps_list.append(Step(num, text, self.ingredient_list))
-            # print(new_steps_list[-1].text)
-            num+=1
-        self.steps_list = new_steps_list
+            old_new_ingredient_list.append([old_ingredient,new_ingredient]) 
+        self.update_steps(old_new_ingredient_list)
     
     def to_itlian(self):
+        self.transformations.append("to italian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
             new_ingredient = to_itlian_style(ingredient.ingredient_name)
             ingredient.ingredient_name = new_ingredient
+            old_new_ingredient_list.append([old_ingredient,new_ingredient])       
+        self.update_steps(old_new_ingredient_list)
+
+    def to_vegetarian(self):
+        self.transformations.append("to vegetarian")
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name
+            if True: # is_meat(ingredient.ingredient_name):
+                new_ingredient = "tofu"
+                ingredient.ingredient_name = new_ingredient
+            else:
+                new_ingredient = old_ingredient
             old_new_ingredient_list.append([old_ingredient,new_ingredient])
-        
-        
+        self.update_steps(old_new_ingredient_list)
+
+    def from_vegetarian(self):
+        self.transformations.append("from vegetarian")
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name
+            if True: # is_vegetarian(ingredient.ingredient_name):
+                new_ingredient = random.choice(["chicken", "steak", "lamb", "turkey"])
+                ingredient.ingredient_name = new_ingredient
+            else:
+                new_ingredient = old_ingredient
+            old_new_ingredient_list.append([old_ingredient,new_ingredient])
+        self.update_steps(old_new_ingredient_list)
+
+    def to_healthy(self):
+        # self.transformations.append("healthy version")
+        # old_new_ingredient_list = []
+        # for ingredient in self.ingredient_list:
+        #     old_ingredient = ingredient.ingredient_name
+        #     new_ingredient = to_chinese_style(ingredient.ingredient_name)
+        #     ingredient.ingredient_name = new_ingredient
+        #     old_new_ingredient_list.append([old_ingredient,new_ingredient])
+        pass
+
+    # update steps according to ingredient transformations
+    def update_steps(self, old_new_ingredient_list):
         new_steps_list=[]
         num=0
         for step in self.steps_list:
@@ -95,8 +118,6 @@ class State:
             # print(new_steps_list[-1].text)
             num+=1
         self.steps_list = new_steps_list
-
-        # print(self.ingredient_list)
 
 def handle_single_character_fractions_smh(q):
     result = q

@@ -146,6 +146,7 @@ def to_chinese_style(ingredient_name):
         ingredient_list = chinese_style.get(category)
         random_element = random.choice(ingredient_list)
     else:
+        return ingredient_name
         ingredient_list = chinese_style.get("condiments")
         random_element = random.choice(ingredient_list)
     
@@ -157,6 +158,7 @@ def to_itlian_style(ingredient_name):
         ingredient_list = italian_style.get(category)
         random_element = random.choice(ingredient_list)
     else:
+        return ingredient_name
         ingredient_list = italian_style.get("condiments")
         random_element = random.choice(ingredient_list)
     

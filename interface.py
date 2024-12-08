@@ -183,11 +183,11 @@ def get_chatbot_response(user_input, model):
     
     to_healthy = ["to healthy"]
     from_healthy = ["from healthy"]
-    to_change_quantity = ["to change quantity"]
+    to_change_quantity = ["change quantity", "scale the recipe"]
     to_vegetarian = ["to vegetarian"]
-    from_vegetarian = ["to vegetarian"]
+    from_vegetarian = ["from vegetarian"]
     to_chinese =["to chinese"]
-    to_itlian = ["to itlian"]
+    to_itlian = ["to italian"]
 
     # n-th step requests
     matching_regex = None
@@ -358,62 +358,72 @@ def get_chatbot_response(user_input, model):
             else:
                 output = "If you're done with the last step, you can move on to the next"
     
-    # to change quantity
+    # change quantity
     elif any(asks in user_input for asks in to_change_quantity):
-        print("what factor you want?")
+        print("By what factor would you like to scale the recipe?")
         factor=input()
         try:
             num_float = float(Fraction(factor))
         except ValueError:
-            print("The string is not a valid float!")
+            print("Please provide a valid int or float!")
         
         model.scale_recipe(num_float)
 
-        print("Here are new ingredient list and steps list: ")
+        print("Here are new the ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
+        output = "What else would you like?"
     
      # to heathly
     elif any(asks in user_input for asks in to_healthy):
-        # todo
-        print("Here are new ingredient list and steps list: ")
-        output = "what else you want?"
+        model.to_healthy()
+        print("Here are new the ingredients and steps: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "What else would you like?"
     
     # from heathly
     elif any(asks in user_input for asks in from_healthy):
-        # todo
-        print("Here are new ingredient list and steps list: ")
-        output = "what else you want?"
+        # TODO
+        print("Here are new the ingredients and steps: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "What else would you like?"
     
     elif any(asks in user_input for asks in to_vegetarian):
-        # todo
-        print("Here are new ingredient list and steps list: ")
-        output = "what else you want?"
+        model.to_vegetarian()
+        print("Here are new the ingredients and steps: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "What else would you like?"
     
     elif any(asks in user_input for asks in from_vegetarian):
-        # todo
-        print("Here are new ingredient list and steps list: ")
-        output = "what else you want?"
+        model.from_vegetarian()
+        print("Here are new the ingredients and steps: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "What else would you like?"
     
     elif any(asks in user_input for asks in to_chinese):
-        # todo
         model.to_chinese()
-        print("Here are new ingredient list and steps list: ")
+        print("Here are new the ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
+        output = "What else would you like?"
 
     elif any(asks in user_input for asks in to_itlian):
-        # todo
         model.to_itlian()
-        print("Here are new ingredient list and steps list: ")
+        print("Here are new the ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
+        output = "What else would you like?"
 
 
     # how do i preheat the oven? (any question that requires external knowledge)
@@ -446,12 +456,14 @@ def get_chatbot_response(user_input, model):
             # answer = input()
             # if answer == "yes"
 
-    # elif "double the recipe" in user_input:
-    #     model.scale_recipe(2)
-    #     output = format_ingredients_request(model.ingredient_list)
-    # elif "half the recipe" in user_input:
-    #     model.scale_recipe(.5)
-    #     output = format_ingredients_request(model.ingredient_list)
+    elif "double the recipe" in user_input:
+        model.scale_recipe(2)
+        output = format_ingredients_request(model.ingredient_list)
+        print("What else would you like?")
+    elif "half the recipe" in user_input:
+        model.scale_recipe(.5)
+        output = format_ingredients_request(model.ingredient_list)
+        print("What else would you like?")
 
     # thank you!
     elif "thank" in user_input:
