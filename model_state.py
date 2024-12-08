@@ -5,6 +5,7 @@ from step import Step
 from gluten_and_lactose_transform import gluten_substitutes, lactose_substitutes
 from vegetarian import is_meat, meat_replace, is_vegetarian, veg_replace
 from healthy_substitutions import healthy_substitutions
+from ingredient import Ingredient
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -15,7 +16,9 @@ class State:
         self.input_history = []
         self.output_history = []
         self.transformations = []
-        self.original_ingredients = ingredient_list
+        self.original_ingredients = []
+        for i in ingredient_list:
+            self.original_ingredients.append(Ingredient(i.quantity, i.measurement, i.descriptors, i.ingredient_name, i.preparations))
         self.original_steps_list = steps_list
 
     def scale_recipe(self, factor):
