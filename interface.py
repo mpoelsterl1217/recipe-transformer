@@ -124,13 +124,22 @@ def get_init_info():
     else:
         return None
     
-def create_file(text,is_transformed):
-    if not is_transformed:
-        with open("input.txt", "w") as file:
-            file.write(text)
+def create_file(text, transformations):
+    # if not is_transformed:
+    #     with open("input.txt", "w") as file:
+    #         file.write(text)
+    # else:
+    #     with open("transformed.txt", "w") as file:
+    #         file.write(text)
+    path = "text_files/recipe"
+    if transformations == []:
+        path += "_original"
     else:
-        with open("transformed.txt", "w") as file:
-            file.write(text)
+        path += "_" + "_".join(transformations)
+    path += ".txt"
+    with open(path, "w") as file:
+        file.write(text)
+    
 
 def setup(model):
 
@@ -165,7 +174,7 @@ def setup(model):
             "\nWhat transformation would you like to perform?"
 
             text = format_ingredients_request(model.ingredient_list) + "\n\n" +  format_steps_request(model.steps_list)
-            create_file(text,False)
+            create_file(text, model.transformations)
             break
         else:
             print()
@@ -184,7 +193,7 @@ def print_post_transformation(model):
     print(format_steps_request(model.steps_list))
 
     result = format_ingredients_request(model.ingredient_list) + "\n\n" + format_steps_request(model.steps_list)
-    create_file(result, True)
+    create_file(result, model.transformations)
     
 
 def get_chatbot_response(user_input, model):
