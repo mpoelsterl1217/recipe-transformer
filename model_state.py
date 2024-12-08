@@ -3,6 +3,7 @@ import re
 from different_style import to_chinese_style, to_itlian_style
 from step import Step
 import random
+from gluten_and_lactose_transform import gluten_substitutes, lactose_substitutes
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -118,6 +119,58 @@ class State:
             # print(new_steps_list[-1].text)
             num+=1
         self.steps_list = new_steps_list
+
+        # print(self.ingredient_list)
+        
+    def to_gluten_free(self):
+        old_new_ingredient_list = []
+    
+    
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name.lower()
+            new_ingredient = gluten_substitutes.get(old_ingredient, old_ingredient)  
+            if old_ingredient != new_ingredient:  
+                ingredient.ingredient_name = new_ingredient
+                old_new_ingredient_list.append([old_ingredient, new_ingredient])
+    
+    
+        new_steps_list = []
+        num = 0
+        for step in self.steps_list:
+            text = step.text
+            if step.details.get("ingredients") is not None and step.details.get("ingredients") != []:
+                for oldname, newname in old_new_ingredient_list:
+                    regex_pattern = r'\b' + re.escape(oldname) + r'\b'
+                    text = re.sub(regex_pattern, newname, text)
+            new_steps_list.append(Step(num, text, self.ingredient_list))
+            num += 1
+    
+        self.steps_list = new_steps_list
+        
+        
+    def to_lactose_free(self):
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name.lower()
+            new_ingredient = lactose_substitutes.get(old_ingredient, old_ingredient)
+            if old_ingredient != new_ingredient:
+                ingredient.ingredient_name = new_ingredient
+                old_new_ingredient_list.append([old_ingredient, new_ingredient])
+    
+        new_steps_list = []
+        num = 0
+        for step in self.steps_list:
+            text = step.text
+            if step.details.get("ingredients") is not None and step.details.get("ingredients") != []:
+                for oldname, newname in old_new_ingredient_list:
+                    regex_pattern = r'\b' + re.escape(oldname) + r'\b'
+                    text = re.sub(regex_pattern, newname, text)
+            new_steps_list.append(Step(num, text, self.ingredient_list))
+            num += 1
+    
+        self.steps_list = new_steps_list
+
+
 
 def handle_single_character_fractions_smh(q):
     result = q

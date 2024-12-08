@@ -188,6 +188,8 @@ def get_chatbot_response(user_input, model):
     from_vegetarian = ["from vegetarian"]
     to_chinese =["to chinese"]
     to_itlian = ["to italian"]
+    to_gluten_free = ["to gluten free", "gluten free"]
+    to_lactose_free = ["to lactose free", "lactose free"]
 
     # n-th step requests
     matching_regex = None
@@ -415,7 +417,27 @@ def get_chatbot_response(user_input, model):
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "What else would you like?"
+        output = "what else you want?"
+        
+    elif any(asks in user_input for asks in to_gluten_free):
+        
+        model.to_gluten_free()
+        print("Here are new ingredient list and steps list: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "what else you want?"
+        
+    elif any(asks in user_input for asks in to_lactose_free):
+        
+        model.to_lactose_free()
+        print("Here are new ingredient list and steps list: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "what else you want?"
+        
+        
 
     elif any(asks in user_input for asks in to_itlian):
         model.to_itlian()
