@@ -204,7 +204,7 @@ def get_chatbot_response(user_input, model):
     nth_step_regexes = [rf"take me to the {ordinal_regex} step",
                                         rf"what's the {ordinal_regex} step", rf"{ordinal_regex} step"]
     
-    to_healthy = ["healthier"]
+    to_healthy = ["healthier", "to healthy"]
     from_healthy = ["from healthy"]
     to_change_quantity = ["change the quantity", "scale the recipe"]
     to_vegetarian = ["to vegetarian", "make it vegetarian", "make the recipe vegetarian"]
@@ -479,12 +479,12 @@ def get_chatbot_response(user_input, model):
 
     elif "double the recipe" in user_input:
         model.scale_recipe(2)
-        output = format_ingredients_request(model.ingredient_list)
-        print("What else would you like?")
+        print_post_transformation(model)
+        output = "What else would you like?"
     elif "half the recipe" in user_input:
         model.scale_recipe(.5)
         output = format_ingredients_request(model.ingredient_list)
-        print("What else would you like?")
+        output = "What else would you like?"
 
     elif "new recipe" in user_input:
         print()
