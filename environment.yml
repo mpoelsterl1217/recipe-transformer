@@ -1,0 +1,6 @@
+name: recipe-transformer1
+channels:
+  - defaults
+dependencies:
+  - openjdk
+prefix: C:\Users\ctawa\anaconda3\envs\recipe-transformer1
