@@ -1,5 +1,6 @@
 # recipe-transformer
 
+Public repo link: https://github.com/mpoelsterl1217/recipe-transformer/tree/main
 
 ## Requirements
 
