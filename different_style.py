@@ -46,7 +46,12 @@ ingredient_categories = {
     "doubanjiang", "fermented black beans", "XO sauce", "chili oil", 
     "Lao Gan Ma", "miso paste", "ketchup", "mustard", 
     "mayonnaise", "sriracha", "barbecue sauce", "teriyaki sauce", "tartar sauce", "worcestershire sauce", 
-    "honey mustard", "tahini", "peanut butter", "almond butter", "black sesame paste", "tomato-basil pasta sauce", "pasta sauce"]
+    "honey mustard", "tahini", "black sesame paste", "tomato-basil pasta sauce", "pasta sauce"],
+
+    "butter-like": [
+        "butter", "peanut butter", "almond butter", "oil", "olive oil", "extra-virgin olive oil",
+        "vegetable oil", "extra virgin olive oil", "soybean", "peanut oil", "melted butter"
+    ]
 
 }
 
@@ -85,7 +90,9 @@ chinese_style = {
     "light soy sauce", "dark soy sauce", "oyster sauce", "hoisin sauce", 
     "black vinegar", "rice vinegar", "plum sauce", "fermented black beans", 
     "chili oil", "Doubanjiang", "sweet bean paste", "Shaoxing wine", "XO sauce", 
-    "sesame oil", "fermented tofu"]
+    "sesame oil", "fermented tofu"],
+
+    "butter-like": ["soybean", "peanut oil"]
 
 }
 
@@ -125,11 +132,13 @@ italian_style = {
     ],
 
     "condiments": [
-        "olive oil", "extra virgin olive oil", "balsamic vinegar", "red wine vinegar", 
+        "balsamic vinegar", "red wine vinegar", 
         "tomato paste", "marinara sauce", "pesto", "alfredo sauce", "capers", 
-        "anchovy paste", "sun-dried tomatoes", "truffle oil", "garlic oil", 
+        "anchovy paste", "sun-dried tomatoes",  
         "Parmesan cheese (grated)", "ricotta", "mascarpone"
-    ]
+    ],
+
+    "butter-like": ["truffle oil", "garlic oil", "olive oil", "extra virgin olive oil", "extra-virgin olive oil"]
 }
 
 
