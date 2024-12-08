@@ -62,7 +62,7 @@ def grab_info(response):
     # steps_list = [item.strip() for item in steps_list]
     # steps_list = [item for item in steps_list if item != ""] 
     
-    return ingredients_list, steps_list
+    return ingredients_list, steps_list, recipe_name
 
 # access and preprocessing the url. Return true if the url exist.
 def confirm_url(url):
@@ -124,20 +124,15 @@ def get_init_info():
     else:
         return None
     
-def create_file(text, transformations):
-    # if not is_transformed:
-    #     with open("input.txt", "w") as file:
-    #         file.write(text)
-    # else:
-    #     with open("transformed.txt", "w") as file:
-    #         file.write(text)
-    path = "text_files/recipe"
+def create_file(text, transformations, title):
+    path = "text_files/"
+    path += title.replace(" ", "_")
     if transformations == []:
         path += "_original"
     else:
         path += "_" + "_".join(transformations)
     path += ".txt"
-    with open(path, "w") as file:
+    with open(path, "w", encoding="utf-8") as file:
         file.write(text)
     
 
@@ -174,7 +169,7 @@ def setup(model):
             "\nWhat transformation would you like to perform?"
 
             text = format_ingredients_request(model.ingredient_list) + "\n\n" +  format_steps_request(model.steps_list)
-            create_file(text, model.transformations)
+            create_file(text, model.transformations, model.title)
             break
         else:
             print()
@@ -193,7 +188,7 @@ def print_post_transformation(model):
     print(format_steps_request(model.steps_list))
 
     result = format_ingredients_request(model.ingredient_list) + "\n\n" + format_steps_request(model.steps_list)
-    create_file(result, model.transformations)
+    create_file(result, model.transformations, model.title)
     
 
 def get_chatbot_response(user_input, model):
@@ -488,12 +483,12 @@ def get_chatbot_response(user_input, model):
 
     elif "double the recipe" in user_input:
         model.scale_recipe(2)
-        output = format_ingredients_request(model.ingredient_list)
-        print("What else would you like?")
+        print(format_ingredients_request(model.ingredient_list))
+        output = "What else would you like?"
     elif "half the recipe" in user_input:
         model.scale_recipe(.5)
-        output = format_ingredients_request(model.ingredient_list)
-        print("What else would you like?")
+        print(format_ingredients_request(model.ingredient_list))
+        output = "What else would you like?"
 
     elif "new recipe" in user_input:
         print()
@@ -506,8 +501,8 @@ def get_chatbot_response(user_input, model):
             init_info = get_init_info()
             if init_info == 'q':
                 return
-        in_list, step_list = init_info
-        model = State(step_list, in_list)
+        in_list, step_list, title = init_info
+        model = State(step_list, in_list, title)
         model = setup(model)
         output = ""
 
@@ -541,8 +536,8 @@ def main():
         init_info = get_init_info()
         if init_info == 'q':
             return
-    in_list, step_list = init_info
-    model = State(step_list, in_list)
+    in_list, step_list, title = init_info
+    model = State(step_list, in_list, title)
     model = setup(model)
 
     user_input = ""

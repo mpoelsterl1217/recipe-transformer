@@ -8,9 +8,10 @@ from healthy_substitutions import healthy_substitutions
 from ingredient import Ingredient
 
 class State:
-    def __init__(self, steps_list, ingredient_list):
+    def __init__(self, steps_list, ingredient_list, title):
         self.steps_list = steps_list
         self.ingredient_list = ingredient_list
+        self.title = title
         self.in_steps = False
         self.current_step = None
         self.input_history = []
