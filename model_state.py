@@ -23,7 +23,7 @@ class State:
 
     def scale_recipe(self, factor):
         
-        self.transformations.append("scale by "+str(factor))
+        self.transformations.append("scale_by_"+str(factor))
         for ingredient in self.ingredient_list:
             ingredient.quantity = handle_single_character_fractions_smh(ingredient.quantity)
             if ingredient.quantity:
@@ -53,7 +53,7 @@ class State:
                         )
 
     def to_chinese(self):
-        self.transformations.append("to chinese")
+        self.transformations.append("to_chinese")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
@@ -64,7 +64,7 @@ class State:
         print_subst(old_new_ingredient_list)
     
     def to_itlian(self):
-        self.transformations.append("to italian")
+        self.transformations.append("to_italian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
@@ -75,7 +75,7 @@ class State:
         print_subst(old_new_ingredient_list)
 
     def to_vegetarian(self):
-        self.transformations.append("to vegetarian")
+        self.transformations.append("to_vegetarian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
@@ -89,7 +89,7 @@ class State:
         print_subst(old_new_ingredient_list)
 
     def from_vegetarian(self):
-        self.transformations.append("from vegetarian")
+        self.transformations.append("from_vegetarian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
@@ -103,7 +103,7 @@ class State:
         print_subst(old_new_ingredient_list)
 
     def to_healthy(self):
-        self.transformations.append("healthy version")
+        self.transformations.append("healthy_version")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
@@ -144,6 +144,7 @@ class State:
         # print(self.ingredient_list)
         
     def to_gluten_free(self):
+        self.transformations.append("gluten_free")
         old_new_ingredient_list = []
     
     
@@ -171,6 +172,7 @@ class State:
         
         
     def to_lactose_free(self):
+        self.transformations.append("lactose_free")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name.lower()
