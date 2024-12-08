@@ -219,18 +219,18 @@ def clean_nouns(words, doc):
             result.append(word)
     return result
 
-ingredients = [
-    "1 (16 ounce) package cottage cheese",
-    "4 ½ cups tomato-basil pasta sauce"
-]
+# ingredients = [
+#     "1 (16 ounce) package cottage cheese",
+#     "4 ½ cups tomato-basil pasta sauce"
+# ]
 
-for i in ingredients:
-    final = parse_ingredient(i)
-    print(i)
-    print(final.quantity)
-    print(final.measurement)
-    print(final.ingredient_name)
-    print()
+# for i in ingredients:
+#     final = parse_ingredient(i)
+#     print(i)
+#     print(final.quantity)
+#     print(final.measurement)
+#     print(final.ingredient_name)
+#     print()
 
 # final = parse_ingredient("5 cups marinara sauce")
 # print(final)

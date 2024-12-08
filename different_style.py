@@ -7,7 +7,7 @@ ingredient_categories = {
     "pork loin", "lamb chops", "goat meat", "turkey", "shrimp", "crab", "lobster", "scallops", "clams", 
     "oysters", "mussels", "salmon", "tuna", "mackerel", "sardines", "eel", "tilapia", "trout", "catfish", 
     "century eggs", "salted duck eggs", "quail eggs", "chickpeas", "lentils", "black beans", "kidney beans", 
-    "adzuki beans", "mung beans", "pinto beans", "navy beans", "fava beans"],
+    "adzuki beans", "mung beans", "pinto beans", "navy beans", "fava beans", "chicken", "steak", "pork"],
 
     "vegetables" : [
     "bok choy", "napa cabbage", "broccoli", "mustard greens", "spinach", "kale", "lettuce", 

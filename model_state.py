@@ -2,8 +2,8 @@ import fractions
 import re
 from different_style import to_chinese_style, to_itlian_style
 from step import Step
-import random
 from gluten_and_lactose_transform import gluten_substitutes, lactose_substitutes
+from vegetarian import is_meat, meat_replace, is_vegetarian, veg_replace
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -55,6 +55,7 @@ class State:
             ingredient.ingredient_name = new_ingredient
             old_new_ingredient_list.append([old_ingredient,new_ingredient]) 
         self.update_steps(old_new_ingredient_list)
+        print_subst(old_new_ingredient_list)
     
     def to_itlian(self):
         self.transformations.append("to italian")
@@ -65,32 +66,35 @@ class State:
             ingredient.ingredient_name = new_ingredient
             old_new_ingredient_list.append([old_ingredient,new_ingredient])       
         self.update_steps(old_new_ingredient_list)
+        print_subst(old_new_ingredient_list)
 
     def to_vegetarian(self):
         self.transformations.append("to vegetarian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
-            if True: # is_meat(ingredient.ingredient_name):
-                new_ingredient = "tofu"
+            if is_meat(ingredient.ingredient_name):
+                new_ingredient = meat_replace(old_ingredient)
                 ingredient.ingredient_name = new_ingredient
             else:
                 new_ingredient = old_ingredient
             old_new_ingredient_list.append([old_ingredient,new_ingredient])
-        self.update_steps(old_new_ingredient_list)
+        self.update_steps(old_new_ingredient_list, veg=True)
+        print_subst(old_new_ingredient_list)
 
     def from_vegetarian(self):
         self.transformations.append("from vegetarian")
         old_new_ingredient_list = []
         for ingredient in self.ingredient_list:
             old_ingredient = ingredient.ingredient_name
-            if True: # is_vegetarian(ingredient.ingredient_name):
-                new_ingredient = random.choice(["chicken", "steak", "lamb", "turkey"])
+            if is_vegetarian(old_ingredient):
+                new_ingredient = veg_replace(old_ingredient)
                 ingredient.ingredient_name = new_ingredient
             else:
                 new_ingredient = old_ingredient
             old_new_ingredient_list.append([old_ingredient,new_ingredient])
         self.update_steps(old_new_ingredient_list)
+        print_subst(old_new_ingredient_list)
 
     def to_healthy(self):
         # self.transformations.append("healthy version")
@@ -103,7 +107,7 @@ class State:
         pass
 
     # update steps according to ingredient transformations
-    def update_steps(self, old_new_ingredient_list):
+    def update_steps(self, old_new_ingredient_list, veg=False):
         new_steps_list=[]
         num=0
         for step in self.steps_list:
@@ -115,6 +119,13 @@ class State:
                     if oldname in text:
                         text = text.replace(oldname, newname)
             # print("wait! :",text)
+            if veg:
+                temp = text.lower()
+                temp = temp.replace(",", "").replace(".", "").replace(";", "").replace(":", "")
+                for word in temp.split():
+                    if is_meat(word):
+                        text = text.replace(word, meat_replace(word))
+            # TODO: DOESNT CHANGE INGREDIENT IN INGREDIENT_LIST
             new_steps_list.append(Step(num, text, self.ingredient_list))
             # print(new_steps_list[-1].text)
             num+=1
@@ -146,6 +157,7 @@ class State:
             num += 1
     
         self.steps_list = new_steps_list
+        print_subst(old_new_ingredient_list)
         
         
     def to_lactose_free(self):
@@ -169,8 +181,19 @@ class State:
             num += 1
     
         self.steps_list = new_steps_list
+        print_subst(old_new_ingredient_list)
 
-
+def print_subst(old_new_ingredients):
+    changes = []
+    for subst in old_new_ingredients:
+        if subst[0] != subst[1]:
+            changes.append(subst[0]+" for "+subst[1])
+    if changes != []:
+        print("I recommend substituting:")
+        for c in changes:
+            print(c)
+    else:
+        print("I don't see anything that needs to be substituted for this transformation!")
 
 def handle_single_character_fractions_smh(q):
     result = q

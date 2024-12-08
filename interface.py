@@ -129,7 +129,7 @@ def setup(model):
     print("[1] Go over ingredients list ")
     print("[2] Go over recipe steps ")
     print("[3] Ask a question about the recipe")
-    print("[4] transform the recipe")
+    print("[4] Transform the recipe")
 
     num=input()
     output = ""
@@ -151,7 +151,7 @@ def setup(model):
             print(format_ingredients_request(model.ingredient_list))
             print()
             print(format_steps_request(model.steps_list))
-            print("\nWhat transform would you like to use?")
+            print("\nWhat transformation would you like to perform?")
             break
         else:
             print()
@@ -225,19 +225,7 @@ def get_chatbot_response(user_input, model):
     #     output = ""
     #     ingredient = re.search(quantity_regex, user_input).group(5)
     #     for i in model.steps_list[model.current_step].details.get("ingredients"):
-
-    elif matching_regex:
-        matches = re.search(matching_regex, user_input)
-        step_num = int(matches.group("numeral"))
-        if step_num > len(model.steps_list) or step_num < 1:
-            output = f"Sorry, there are only {len(model.steps_list)} steps."
-        else:
-            model.current_step = step_num - 1
-            model.in_steps = True
-            output = f"The {matches.group('ordinal')} step is: " + model.steps_list[model.current_step].text
-            model.output_history.append(model.steps_list[model.current_step].text)
-
-    
+   
     # what tools do i need for this recipe?
     elif ("what tools" in user_input or "which tools" in user_input) and "recipe" in user_input:
         output = "For this recipe, you will need:"
@@ -328,6 +316,18 @@ def get_chatbot_response(user_input, model):
             model.output_history.append(output)
             model.current_step -= 1
 
+    elif matching_regex:
+        matches = re.search(matching_regex, user_input)
+        step_num = int(matches.group("numeral"))
+        if step_num > len(model.steps_list) or step_num < 1:
+            output = f"Sorry, there are only {len(model.steps_list)} steps."
+        else:
+            model.current_step = step_num - 1
+            model.in_steps = True
+            output = f"The {matches.group('ordinal')} step is: " + model.steps_list[model.current_step].text
+            model.output_history.append(model.steps_list[model.current_step].text)
+
+
     # show me the steps list
     elif any(asks in user_input for asks in all_step_asks):
         output = "Sure. The steps list is as follows:\n"
@@ -371,7 +371,7 @@ def get_chatbot_response(user_input, model):
         
         model.scale_recipe(num_float)
 
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
@@ -380,7 +380,7 @@ def get_chatbot_response(user_input, model):
      # to heathly
     elif any(asks in user_input for asks in to_healthy):
         model.to_healthy()
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
@@ -389,7 +389,7 @@ def get_chatbot_response(user_input, model):
     # from heathly
     elif any(asks in user_input for asks in from_healthy):
         # TODO
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
@@ -397,7 +397,7 @@ def get_chatbot_response(user_input, model):
     
     elif any(asks in user_input for asks in to_vegetarian):
         model.to_vegetarian()
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
@@ -405,7 +405,7 @@ def get_chatbot_response(user_input, model):
     
     elif any(asks in user_input for asks in from_vegetarian):
         model.from_vegetarian()
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
@@ -413,35 +413,34 @@ def get_chatbot_response(user_input, model):
     
     elif any(asks in user_input for asks in to_chinese):
         model.to_chinese()
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
+        output = "What else would you like?"
         
     elif any(asks in user_input for asks in to_gluten_free):
         
         model.to_gluten_free()
-        print("Here are new ingredient list and steps list: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
+        output = "What else would you like?"
         
     elif any(asks in user_input for asks in to_lactose_free):
         
         model.to_lactose_free()
-        print("Here are new ingredient list and steps list: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
-        output = "what else you want?"
-        
+        output = "What else would you like?"
         
 
     elif any(asks in user_input for asks in to_itlian):
         model.to_itlian()
-        print("Here are new the ingredients and steps: ")
+        print("Here are the new ingredients and steps: ")
         print(format_ingredients_request(model.ingredient_list))
         print()
         print(format_steps_request(model.steps_list))
