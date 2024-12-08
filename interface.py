@@ -15,6 +15,10 @@ def grab_info(response):
     # todo
     print("parsing...")
     soup = BeautifulSoup(response.content, "html.parser")
+
+    recipe_name = soup.find(class_='article-heading text-headline-400').text
+    # print(recipe_name)
+
     ingredients = soup.find(class_='mm-recipes-structured-ingredients__list')
     ingredients_list = []
     if len(ingredients) == 0:
