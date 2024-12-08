@@ -4,14 +4,14 @@ meats = ["chicken breast", "chicken thighs", "duck", "roast duck", "beef brisket
     "pork loin", "lamb chops", "goat meat", "turkey", "shrimp", "crab", "lobster", "scallops", "clams", 
     "oysters", "mussels", "salmon", "tuna", "mackerel", "sardines", "eel", "tilapia", "trout", "catfish", 
     "chicken", "steak", "pork", "lamb", "mutton", "sausage", "meatballs", "meatball", "meat", "veal",
-    "vennison", "beef", "ham", "deli ham"]
+    "vennison", "beef", "ham", "deli ham", "bacon", "steamed bacon"]
 
 vegetarian_substitutes = ["tofu", "seitan", "tempeh", "jackfruit"]
 
 def is_meat(ingredient):
     if ingredient in meats:
         return True
-    for m in ["chicken", "ham", "steak", "veal", "beef", "pork", "salmon", "tuna", "meat"]:
+    for m in ["chicken", "ham", "steak", "veal", "beef", "pork", "salmon", "tuna", "meat", "bacon"]:
         if m in ingredient.split():
             return True
     return False

@@ -6,20 +6,20 @@ ingredient_categories = {
     "chicken breast", "chicken thighs", "duck", "roast duck", "beef brisket", "ground beef", "pork belly", 
     "pork loin", "lamb chops", "goat meat", "turkey", "shrimp", "crab", "lobster", "scallops", "clams", 
     "oysters", "mussels", "salmon", "tuna", "mackerel", "sardines", "eel", "tilapia", "trout", "catfish", 
-    "century eggs", "salted duck eggs", "quail eggs", "chickpeas", "lentils", "black beans", "kidney beans", 
-    "adzuki beans", "mung beans", "pinto beans", "navy beans", "fava beans", "chicken", "steak", "pork"],
+    "chickpeas", "lentils", "black beans", "kidney beans", 
+    "adzuki beans", "mung beans", "pinto beans", "navy beans", "fava beans", "chicken", "steak", "pork", "bacon"],
 
     "vegetables" : [
     "bok choy", "napa cabbage", "broccoli", "mustard greens", "spinach", "kale", "lettuce", 
     "romaine lettuce", "arugula", "Swiss chard", "carrots", "beets", "radishes", "daikon radish", "lotus root", 
     "ginger root", "garlic", "onions", "red onions", "green onions", "shallots", "leeks", 
     "potatoes", "sweet potatoes", "yams", "taro", "cassava", "burdock root", "zucchini", "cucumbers", 
-    "bell peppers", "eggplant", "broccoli", "cauliflower", 
-    "mushrooms", "snow peas", "sugar snap peas", 
-    "green beans", "asparagus", "bamboo shoots", "water chestnuts", "celery", "tomatoes", "okra", "fennel"],
+    "bell peppers", "broccoli", "cauliflower", 
+    "mushrooms", "snow peas",
+    "green beans", "asparagus", "bamboo shoots", "celery", "tomatoes", "okra", "fennel"],
 
     "herbs_and_spices" : [
-    "cilantro", "parsley", "basil", "Thai basil", "mint", "dill", "thyme", "oregano", "rosemary", "tarragon", 
+    "cilantro", "parsley", "basil", "thai basil", "mint", "dill", "thyme", "oregano", "rosemary", "tarragon", 
     "scallions", "chives", "bay leaves", "star anise", "cinnamon sticks", "cloves", 
     "cardamom", "fennel seeds", "cumin seeds", "fenugreek", "turmeric", "ginger", "garlic", "chili flakes", 
     "dried chilies", "Sichuan peppercorns", "white pepper", "black pepper", "paprika", "smoked paprika", 
@@ -36,7 +36,7 @@ ingredient_categories = {
     "grains_and_starches" : [
     "rice", "quinoa", 
     "barley", "wheat berries", "bulgur wheat", "millet", "amaranth", "farro", "buckwheat", "cornmeal", 
-    "polenta", "grits", "oats", "flour", "vermicelli noodles", "egg noodles", "wheat noodles (lo mein)", 
+    "polenta", "grits", "oats", "flour", "vermicelli noodles", "wheat noodles (lo mein)", 
     "rice noodles", "glass noodles", "udon noodles", "soba noodles", "instant ramen", 
     "sweet potatoes", "cassava", "tapioca"],
 
@@ -58,21 +58,21 @@ ingredient_categories = {
 chinese_style = {
     "proteins" : [
     "tofu", "silken tofu", "fermented tofu", "tempeh", "seitan", "soybeans", 
-    "century eggs", "salted duck eggs", "Peking duck", "roast pork", "ground pork", 
+    "Peking duck", "roast pork", "ground pork", 
     "beef shank", "pork belly", "duck", "chicken thighs", "shrimp", "dried shrimp", 
     "scallops", "crab", "eel", "fish balls", "Chinese sausage", "dried fish"],
 
     "vegetables" : [
     "bok choy", "napa cabbage", "Chinese broccoli", "choy sum", "mustard greens", 
-    "lotus root", "daikon radish", "water spinach", "bamboo shoots", "water chestnuts", 
+    "lotus root", "daikon radish", "bamboo shoots",
     "winter melon", "shiitake mushrooms", "wood ear mushrooms", "enoki mushrooms", 
-    "snow peas", "Chinese eggplant", "taro", "garlic chives", "Chinese celery", 
+    "snow peas", "taro", "garlic chives", "Chinese celery", 
     "yam", "bitter melon"],
 
     "fruits" : [
     "lychee", "longan", "dragon fruit", "jackfruit", "durian", "pomelo", 
     "mandarin orange", "Chinese pear", "persimmon", "jujube", "starfruit", 
-    "hawthorn", "mango", "pineapple", "watermelon", "honeydew melon", "coconut", 
+    "hawthorn", "mango", "pineapple", "honeydew melon", "coconut", 
     "apple", "plum"],
 
     "herbs_and_spices" : [
@@ -83,7 +83,7 @@ chinese_style = {
     "grains_and_starches" : [
     "white rice", "jasmine rice", "sticky rice", "black rice", "millet", 
     "rice noodles", "glass noodles", "wheat noodles", "hand-pulled noodles", 
-    "egg noodles", "udon noodles"],
+    "udon noodles"],
 
     "condiments" : [
     "light soy sauce", "dark soy sauce", "oyster sauce", "hoisin sauce", 
@@ -100,12 +100,12 @@ italian_style = {
         "chicken breast", "pork loin", "ground beef", "veal", "Italian sausage", 
         "prosciutto", "pancetta", "salami", "bresaola", "mortadella", 
         "anchovies", "tuna", "clams", "mussels", "calamari", "shrimp", 
-        "scallops", "eggplant (as a protein substitute)", "ricotta cheese", 
+        "scallops", "ricotta cheese", 
         "mozzarella cheese", "parmesan cheese", "pecorino romano"
     ],
 
     "vegetables": [
-        "tomatoes", "zucchini", "bell peppers", "artichokes", "eggplant", 
+        "tomatoes", "zucchini", "bell peppers", "artichokes",
         "spinach", "kale", "arugula", "fennel", "mushrooms", 
         "onions", "garlic", "leeks", "carrots", "celery", "radicchio", 
         "cherry tomatoes", "olives", "capers", "basil leaves"
@@ -120,7 +120,7 @@ italian_style = {
     "herbs_and_spices": [
         "basil", "oregano", "rosemary", "thyme", "parsley", "sage", 
         "marjoram", "bay leaves", "fennel seeds", "chili flakes", 
-        "black pepper", "white pepper", "nutmeg", "garlic", "onion powder"
+        "black pepper", "white pepper", "red pepper", "green pepper" "nutmeg", "garlic", "onion powder"
     ],
 
     "grains_and_starches": [
@@ -149,11 +149,13 @@ def find_category(ingredient_name):
     return None
 
 def to_chinese_style(ingredient_name):
-    random.seed(42)
+    # seed = 42
     category = find_category(ingredient_name)
     if category != None:
+        # random.seed(seed)
         ingredient_list = chinese_style.get(category)
         random_element = random.choice(ingredient_list)
+        # seed += 1
     else:
         return ingredient_name
         ingredient_list = chinese_style.get("condiments")
@@ -162,11 +164,13 @@ def to_chinese_style(ingredient_name):
     return random_element
 
 def to_itlian_style(ingredient_name):
-    random.seed(42)
+    # seed = 42
     category = find_category(ingredient_name)
     if category != None:
+        # random.seed(seed)
         ingredient_list = italian_style.get(category)
         random_element = random.choice(ingredient_list)
+        # seed += 1
     else:
         return ingredient_name
         ingredient_list = italian_style.get("condiments")
