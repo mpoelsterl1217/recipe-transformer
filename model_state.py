@@ -1,5 +1,7 @@
 import fractions
 import re
+from different_style import to_chinese_style, to_itlian_style
+from step import Step
 
 class State:
     def __init__(self, steps_list, ingredient_list):
@@ -31,7 +33,9 @@ class State:
                     if quantity:  # Ensure quantity is not None or empty
                         # Compute the new quantity
                         new_quantity = float(fractions.Fraction(quantity)) * factor
-                    
+
+                        current_usage["quantity"] = new_quantity
+
                         # Create the regex dynamically to match the exact quantity
                         regex_pattern = rf"\b{quantity}\b(\s*{unit})?"
                     
@@ -42,8 +46,57 @@ class State:
                             step.text
                         )
 
+    def to_chinese(self):
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name
+            new_ingredient = to_chinese_style(ingredient.ingredient_name)
+            ingredient.ingredient_name = new_ingredient
+            old_new_ingredient_list.append([old_ingredient,new_ingredient])
+        
+        
+        new_steps_list=[]
+        num=0
+        for step in self.steps_list:
+            text = step.text
+            if step.details.get("ingredients") != None and step.details.get("ingredients") !=[]:
+                for i in old_new_ingredient_list:
+                    oldname = i[0]
+                    newname = i[1]
+                    if oldname in text:
+                        text = text.replace(oldname, newname)
+            # print("wait! :",text)
+            new_steps_list.append(Step(num, text, self.ingredient_list))
+            # print(new_steps_list[-1].text)
+            num+=1
+        self.steps_list = new_steps_list
+    
+    def to_itlian(self):
+        old_new_ingredient_list = []
+        for ingredient in self.ingredient_list:
+            old_ingredient = ingredient.ingredient_name
+            new_ingredient = to_itlian_style(ingredient.ingredient_name)
+            ingredient.ingredient_name = new_ingredient
+            old_new_ingredient_list.append([old_ingredient,new_ingredient])
+        
+        
+        new_steps_list=[]
+        num=0
+        for step in self.steps_list:
+            text = step.text
+            if step.details.get("ingredients") != None and step.details.get("ingredients") !=[]:
+                for i in old_new_ingredient_list:
+                    oldname = i[0]
+                    newname = i[1]
+                    if oldname in text:
+                        text = text.replace(oldname, newname)
+            # print("wait! :",text)
+            new_steps_list.append(Step(num, text, self.ingredient_list))
+            # print(new_steps_list[-1].text)
+            num+=1
+        self.steps_list = new_steps_list
 
-        print(self.ingredient_list)
+        # print(self.ingredient_list)
 
 def handle_single_character_fractions_smh(q):
     result = q

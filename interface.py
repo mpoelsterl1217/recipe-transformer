@@ -50,10 +50,10 @@ def grab_info(response):
 
                 num += 1
 
-    for i in steps_list:
-        print(i.text)
-        print(i.details)
-        print()
+    # for i in steps_list:
+    #     print(i.text)
+    #     print(i.details)
+    #     print()
     # steps_list.pop(0)
     # steps_list = [item.strip() for item in steps_list]
     # steps_list = [item for item in steps_list if item != ""] 
@@ -186,6 +186,8 @@ def get_chatbot_response(user_input, model):
     to_change_quantity = ["to change quantity"]
     to_vegetarian = ["to vegetarian"]
     from_vegetarian = ["to vegetarian"]
+    to_chinese =["to chinese"]
+    to_itlian = ["to itlian"]
 
     # n-th step requests
     matching_regex = None
@@ -394,6 +396,24 @@ def get_chatbot_response(user_input, model):
         # todo
         print("Here are new ingredient list and steps list: ")
         output = "what else you want?"
+    
+    elif any(asks in user_input for asks in to_chinese):
+        # todo
+        model.to_chinese()
+        print("Here are new ingredient list and steps list: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "what else you want?"
+
+    elif any(asks in user_input for asks in to_itlian):
+        # todo
+        model.to_itlian()
+        print("Here are new ingredient list and steps list: ")
+        print(format_ingredients_request(model.ingredient_list))
+        print()
+        print(format_steps_request(model.steps_list))
+        output = "what else you want?"
 
 
     # how do i preheat the oven? (any question that requires external knowledge)
@@ -426,12 +446,12 @@ def get_chatbot_response(user_input, model):
             # answer = input()
             # if answer == "yes"
 
-    elif "double the recipe" in user_input:
-        model.scale_recipe(2)
-        output = format_ingredients_request(model.ingredient_list)
-    elif "half the recipe" in user_input:
-        model.scale_recipe(.5)
-        output = format_ingredients_request(model.ingredient_list)
+    # elif "double the recipe" in user_input:
+    #     model.scale_recipe(2)
+    #     output = format_ingredients_request(model.ingredient_list)
+    # elif "half the recipe" in user_input:
+    #     model.scale_recipe(.5)
+    #     output = format_ingredients_request(model.ingredient_list)
 
     # thank you!
     elif "thank" in user_input:
