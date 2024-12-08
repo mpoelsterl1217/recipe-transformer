@@ -61,6 +61,7 @@ from stanford_parser import IngredientParser
 from ingredient import Ingredient
 
 nlp = spacy.load("en_core_web_sm")
+nltk.download('averaged_perceptron_tagger_eng')
 
 lemmatizer = WordNetLemmatizer()
 
