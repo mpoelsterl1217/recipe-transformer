@@ -24,8 +24,8 @@ We have also implemented the following optional features:
 - scale the recipe by any factor ("scale the recipe")
 - change to gluten free ("make it gluten free")
 - change to lactose free ("make it lactose free")
-- change to Chinese cuisine ("make it Chinese cuisine")
-- change to Itlian cuisine ("make it Chinese cuisine")
+- change to Chinese cuisine ("to chinese")
+- change to Itlian cuisine ("to italian")
 
 ## Previous Features
 
