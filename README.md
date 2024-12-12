@@ -34,6 +34,8 @@ We have also implemented the following optional features:
 - change to Chinese cuisine ("to chinese")
 
 
+You can find the result of transformer in text_files.
+
 ## Previous Features
 
 Previous features are still supported, allowing for inquiries such as:
