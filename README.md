@@ -4,6 +4,8 @@ Public repo link: https://github.com/mpoelsterl1217/recipe-transformer/tree/main
 
 ## Requirements
 
+python virtual environment version: 3.12.7
+
 You must have a Java runtime installed on your machine. Install 'requirements.txt' in a virtual environment. Because of the way Windows unzips files, you may encounter an issue where the code has trouble referencing the correct file path. If this happens, make sure to check that the contents of stanford-core-nlp-4.5.7.zip are directly inside a folder with the name stanford-core-nlp-4.5.7/ . This should happen automatically when running the code, but ocassionally Windows unzips the contents into a second subfolder. Feel free to contact us with any questions.
 
 ## Instructions
@@ -12,7 +14,11 @@ Simply run the interface.py file in a virtual environment to interact with the c
 
 ## Transformer
 
-We have added features to our chatbot to support recipe transformation. We have implemented the following required features:
+We have added features to our chatbot to support recipe transformation. We have implemented the following 
+
+Enter 4 for project 3.
+
+required features:
 - change to a vegetarian version ("make it vegetarian")
 - change from a vegetarian version ("change it from vegetarian")
 - change to Italian cuisine ("make it Italian cuisine")
@@ -26,7 +32,7 @@ We have also implemented the following optional features:
 - change to gluten free ("make it gluten free")
 - change to lactose free ("make it lactose free")
 - change to Chinese cuisine ("to chinese")
-- change to Itlian cuisine ("to italian")
+
 
 ## Previous Features
 
